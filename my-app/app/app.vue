@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Welcome to My App</h1>
-    <p>This is the main application component.</p>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
