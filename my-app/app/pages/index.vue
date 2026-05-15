@@ -1,6 +1,5 @@
 <template>
-  <div class="">
-    <img src="../assets/icons/logo.png" alt="Logo">
-    
+  <div class="items-center justify-between px-12">
+    <CardList/>
   </div>
 </template>
