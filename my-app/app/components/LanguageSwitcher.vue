@@ -30,7 +30,7 @@ onUnmounted(() => document.removeEventListener('click', handleOutsideClick))
   <div ref="containerRef" class="relative">
     <button
       @click="open = !open"
-      class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-[#2A2230] hover:border-[#2A2230] transition-all duration-200 select-none"
+      class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-[#2A2230] hover:border-[#2A2230] transition-all duration-200 select-none cursor-pointer"
     >
       <span class="text-base leading-none">{{ selected.flag }}</span>
       <span class="text-xs font-semibold tracking-wide">{{ selected.code }}</span>

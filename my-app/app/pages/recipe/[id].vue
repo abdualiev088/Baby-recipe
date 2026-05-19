@@ -31,11 +31,16 @@ function toggleStep(index: number) {
   }
   completedSteps.value = next
 }
+
+const favoritesStore = useFavoritesStore()
+const { copied, shareRecipe } = useShare()
 </script>
 
 <template>
   <div class="grid grid-cols-10 gap-4 min-h-screen" style="background: #FFFAF3">
-    <div class="col-span-2 bg-[#FFDECD]">video</div>
+    <div class="col-span-2 bg-[#FFDECD] flex flex-col items-center pt-6">
+      video
+    </div>
     <div class="w-[750px] col-span-6 mx-auto">
 
       <!-- ── Hero ─────────────────────────────────────────── -->
@@ -49,21 +54,34 @@ function toggleStep(index: number) {
         <div class="absolute top-5 left-5 right-5 flex items-center justify-between z-10">
           <button
             @click="router.back()"
-            class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform"
+            class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform cursor-pointer"
           >
             <svg class="w-4 h-4 text-[#2A2230]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="15 18 9 12 15 6"/>
             </svg>
           </button>
           <div class="flex items-center gap-2">
-            <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform">
+            <button
+              @click="shareRecipe"
+              class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform cursor-pointer"
+            >
               <svg class="w-4 h-4 text-[#2A2230]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
                 <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
               </svg>
             </button>
-            <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform">
-              <svg class="w-4 h-4 text-[#2A2230]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button
+              @click="favoritesStore.toggleFavorite(recipe.id)"
+              class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform cursor-pointer"
+            >
+              <svg
+                class="w-4 h-4 transition-colors duration-200"
+                :class="favoritesStore.isFavorite(recipe.id) ? 'text-[#e07a5f]' : 'text-[#2A2230]'"
+                viewBox="0 0 24 24"
+                :fill="favoritesStore.isFavorite(recipe.id) ? 'currentColor' : 'none'"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
               </svg>
             </button>
@@ -263,6 +281,29 @@ function toggleStep(index: number) {
 
       </div>
     </div>
-    <div class="col-span-2 bg-[#FFDECD]">video</div>
+    <div class="col-span-2 bg-[#FFDECD] flex flex-col items-center pt-6">
+      video
+    </div>
+
+    <!-- Toast: link copied -->
+    <Transition name="fade">
+      <div
+        v-if="copied"
+        class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#2A2230] text-white text-sm font-medium px-5 py-2.5 rounded-full shadow-lg pointer-events-none whitespace-nowrap"
+      >
+        Link copied
+      </div>
+    </Transition>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

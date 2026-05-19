@@ -30,7 +30,7 @@ const filtered = computed(() =>
           :key="p.label"
           @click="selectedPeriod = p"
           :class="[
-            'px-5 py-2 rounded-full text-sm font-medium transition-all duration-200',
+            'px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer',
             selectedPeriod.label === p.label
               ? 'bg-[#2A2230] text-white shadow-md'
               : p.label === '1 year →'

@@ -39,7 +39,7 @@
         <p v-else class="text-gray-500 text-sm text-center px-8">Move your mouse (or finger) to catch<br>falling ingredients with the basket</p>
         <button
           @click="startGame"
-          class="px-7 py-2.5 bg-[#2A2230] text-white rounded-full font-semibold hover:opacity-80 active:scale-95 transition"
+          class="px-7 py-2.5 bg-[#2A2230] text-white rounded-full font-semibold hover:opacity-80 active:scale-95 transition cursor-pointer"
         >
           {{ gameOver ? 'Play Again' : 'Start Game' }}
         </button>
